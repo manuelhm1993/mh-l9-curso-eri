@@ -8,7 +8,9 @@ class GameController extends Controller
 {
     // Página principal de juegos
     public function index() {
-        return view('games.index');
+        $games = ['Fifa 22', 'NBA 22', 'Mario Kart', 'Super Mario'];
+
+        return view('games.index', compact('games'));
     }
 
     // Formulario para dar de alta un nuevo juego
