@@ -10,12 +10,12 @@ class VideoGameController extends Controller
 {
     // Página principal de juegos
     public function index() {
-        // $games = VideoGame::orderBy('id', 'desc')->get();
+        $games = VideoGame::orderBy('id', 'desc')->get();
 
         // Ordenar una colección
-        $games = VideoGame::all()->sortBy([
-            ['id', 'desc']
-        ]);
+        // $games = VideoGame::all()->sortBy([
+        //     ['id', 'desc']
+        // ]);
 
         return view('games.index', compact('games'));
     }
@@ -43,5 +43,23 @@ class VideoGameController extends Controller
     // Despliega el nombre y la categoría a la que pertenece el juego
     public function show(VideoGame $video_game) {
         return view('games.show', compact('video_game'));
+    }
+
+    // Formulario para editar un juego
+    public function edit(VideoGame $video_game) {
+        $categories = Category::all();
+
+        return view('games.edit', compact('categories', 'video_game'));
+    }
+
+    // Actualizar el juego con los datos recibidos
+    public function update(Request $request, VideoGame $video_game) {
+        $video_game->name        = $request->name;
+        $video_game->category_id = $request->category_id;
+        $video_game->active      = 1;
+
+        $video_game->save();
+
+        return to_route('games.index');
     }
 }

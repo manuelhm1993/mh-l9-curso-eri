@@ -25,6 +25,7 @@
                 <th scope="row">Categoría</th>
                 <th scope="row">Creado</th>
                 <th scope="row">Disponible</th>
+                <th scope="row">Acciones</th>
             </tr>
         </thead>
 
@@ -42,6 +43,10 @@
                     @else
                         <span style='color:red'>No</span>
                     @endif
+                </td>
+                <td>
+                    <a href="{{ route('games.show', $game->id) }}">Detalles</a>
+                    <a href="{{ route('games.edit', $game->id) }}">Editar</a>
                 </td>
             </tr>
         @empty

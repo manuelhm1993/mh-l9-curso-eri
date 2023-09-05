@@ -9,6 +9,10 @@
 <body>
     <h1>Detalles del juego</h1>
 
+    <p>
+        <a href="{{ route('games.index') }}">Ver juegos</a>
+    </p>
+
     <ul>
         <li>Nombre: {{ $video_game->name }}</li>
         <li>Categoría: {{ $video_game->category->name }}</li>

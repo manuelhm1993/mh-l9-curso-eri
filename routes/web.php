@@ -26,4 +26,6 @@ Route::controller(VideoGameController::class)->prefix('/games')->name('games.')-
     Route::get('/create', 'create')->name('create');
     Route::post('/', 'store')->name('store');
     Route::get('/{video_game}', 'show')->name('show');
+    Route::get('/{video_game}/edit', 'edit')->name('edit');
+    Route::put('/{video_game}', 'update')->name('update');
 });

@@ -16,9 +16,9 @@
     <form action="{{ route('games.store') }}" method="POST">
         @csrf
 
-        <input type="text" placeholder="Nombre" name="name">
+        <input type="text" placeholder="Nombre" name="name" required>
 
-        <select name="category_id">
+        <select name="category_id" required>
             @foreach ($categories as $category)
                 <option value="{{ $category->id }}">{{ $category->name }}</option>
             @endforeach
