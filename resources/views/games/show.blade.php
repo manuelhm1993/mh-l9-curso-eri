@@ -7,12 +7,12 @@
     <title>Games - Show</title>
 </head>
 <body>
-    @if ($category === '')
-        <h1>El nombre del video juego es: {{ $name }}</h1>
-    @else
-        <h1>El nombre del video juego es: {{ $name }} y la categoría es: {{ $category }}</h1>
-    @endif
+    <h1>Detalles del juego</h1>
 
-    <h3>Fecha: {{ $fecha }}</h3>
+    <ul>
+        <li>Nombre: {{ $video_game->name }}</li>
+        <li>Categoría: {{ $video_game->category->name }}</li>
+        <li>Fecha: {{ date('d/m/Y', strtotime($video_game->created_at)) }}</li>
+    </ul>
 </body>
 </html>

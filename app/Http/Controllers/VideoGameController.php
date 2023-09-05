@@ -41,9 +41,7 @@ class VideoGameController extends Controller
     }
 
     // Despliega el nombre y la categoría a la que pertenece el juego
-    public function show($name_game, $category = '') {
-        $date = date('d-m-Y');
-
-        return view('games.show', ['name' => $name_game, 'category' => $category, 'fecha' => $date]);
+    public function show(VideoGame $video_game) {
+        return view('games.show', compact('video_game'));
     }
 }
