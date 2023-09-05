@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         // Llama a los seeders en su interior ejecutando su método run();
         $this->call([
             CategorySeeder::class,
+            VideoGameSeeder::class,
         ]);
     }
 }
