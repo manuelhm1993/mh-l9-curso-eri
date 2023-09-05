@@ -10,7 +10,12 @@ class VideoGameController extends Controller
 {
     // Página principal de juegos
     public function index() {
-        $games = VideoGame::paginate(25);
+        // $games = VideoGame::orderBy('id', 'desc')->get();
+
+        // Ordenar una colección
+        $games = VideoGame::all()->sortBy([
+            ['id', 'desc']
+        ]);
 
         return view('games.index', compact('games'));
     }

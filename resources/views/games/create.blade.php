@@ -14,9 +14,9 @@
 
         <input type="text" placeholder="Nombre" name="name">
 
-        <select name="category" id="category">
+        <select name="category_id">
             @foreach ($categories as $category)
-                <option value="{{ $category->id }}" name="category_id">{{ $category->name }}</option>
+                <option value="{{ $category->id }}">{{ $category->name }}</option>
             @endforeach
         </select>
 
