@@ -9,12 +9,15 @@
 <body>
     <h1>Formulario de creación de video juegos</h1>
 
-    <form action="">
-        <input type="text" placeholder="Nombre" name="name_game">
+    <form action="{{ route('games.store') }}" method="POST">
+        @csrf
+
+        <input type="text" placeholder="Nombre" name="name">
 
         <select name="category" id="category">
-            <option value="deportes">Deportes</option>
-            <option value="accion">Acción</option>
+            @foreach ($categories as $category)
+                <option value="{{ $category->id }}" name="category_id">{{ $category->name }}</option>
+            @endforeach
         </select>
 
         <button type="submit" name="enviar">Enviar</button>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\VideoGame;
 use Illuminate\Http\Request;
 
@@ -16,15 +17,27 @@ class VideoGameController extends Controller
 
     // Formulario para dar de alta un nuevo juego
     public function create() {
-        return view('games.create');
+        $categories = Category::all();
+
+        return view('games.create', compact('categories'));
+    }
+
+    // Guardar en BBDD el nuevo video juego
+    public function store(Request $request) {
+        $game = new VideoGame;
+
+        $game->name        = $request->name;
+        $game->category_id = $request->category_id;
+        $game->active      = 1;
+
+        $game->save();
+
+        return to_route('games.index');
     }
 
     // Despliega el nombre y la categoría a la que pertenece el juego
-    public function help($name_game, $category = '') {
+    public function show($name_game, $category = '') {
         $date = date('d-m-Y');
-
-        // Da la fecha y hora según el timezone indicado
-        // $date = Now('America/Caracas');
 
         return view('games.show', ['name' => $name_game, 'category' => $category, 'fecha' => $date]);
     }

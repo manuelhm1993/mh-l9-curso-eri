@@ -24,5 +24,6 @@ Route::get('/', function () {
 Route::controller(VideoGameController::class)->prefix('/games')->name('games.')->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('/create', 'create')->name('create');
-    Route::get('/{name_game}/{category?}', 'help')->name('help');
+    Route::get('/{name_game}/{category?}', 'show')->name('show');
+    Route::post('/', 'store')->name('store');
 });
