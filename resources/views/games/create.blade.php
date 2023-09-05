@@ -9,6 +9,10 @@
 <body>
     <h1>Formulario de creación de video juegos</h1>
 
+    <p>
+        <a href="{{ route('games.index') }}">Ver juegos</a>
+    </p>
+
     <form action="{{ route('games.store') }}" method="POST">
         @csrf
 

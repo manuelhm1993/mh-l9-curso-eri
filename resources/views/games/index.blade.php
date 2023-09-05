@@ -10,6 +10,11 @@
 </head>
 <body>
     <h1>Vista creada en blade y llamada desde el GameController</h1>
+
+    <p>
+        <a href="{{ route('games.create') }}">Nuevo juego</a>
+    </p>
+
     <h2>Listado de juegos</h2>
 
     <table>
