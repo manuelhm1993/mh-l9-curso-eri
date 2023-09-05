@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\VideoGame;
 use Illuminate\Http\Request;
 
 class VideoGameController extends Controller
 {
     // Página principal de juegos
     public function index() {
-        $games = ['Fifa 22', 'NBA 22', 'Mario Kart', 'Super Mario'];
+        $games = VideoGame::all();
 
         return view('games.index', compact('games'));
     }

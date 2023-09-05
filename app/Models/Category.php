@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
+
+    /**
+     * Get the video games for the category.
+     */
+    public function videoGames()
+    {
+        return $this->hasMany(VideoGame::class);
+    }
 }
