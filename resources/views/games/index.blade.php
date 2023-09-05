@@ -16,6 +16,7 @@
                 <th scope="row">#</th>
                 <th scope="row">Nombre</th>
                 <th scope="row">Categoría</th>
+                <th scope="row">Creado</th>
                 <th scope="row">Disponible</th>
             </tr>
         </thead>
@@ -27,7 +28,14 @@
                 <td>{{ $game->id }}</td>
                 <td>{{ $game->name }}</td>
                 <td>{{ $game->category->name }}</td>
-                <td>{{ ($game->active) ? "Si" : "No" }}</td>
+                <td>{{ date('d/m/Y', strtotime($game->created_at)) }}</td>
+                <td>
+                    @if ($game->active)
+                        <span style='color:green'>Si</span>
+                    @else
+                        <span style='color:red'>No</span>
+                    @endif
+                </td>
             </tr>
         @empty
             <tr>
@@ -36,5 +44,7 @@
         @endforelse
         </tbody>
     </table>
+
+    {{ $games->links() }}
 </body>
 </html>
