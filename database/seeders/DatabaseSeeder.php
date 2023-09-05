@@ -14,6 +14,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        // Llama a los seeders en su interior ejecutando su método run();
+        $this->call([
+            CategorySeeder::class,
+            VideoGameSeeder::class,
+        ]);
     }
 }
