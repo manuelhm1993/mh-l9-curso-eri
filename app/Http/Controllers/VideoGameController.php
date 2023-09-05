@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class GameController extends Controller
+class VideoGameController extends Controller
 {
     // Página principal de juegos
     public function index() {

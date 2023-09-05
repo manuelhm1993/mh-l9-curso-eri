@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\GameController;
+use App\Http\Controllers\VideoGameController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +21,7 @@ Route::get('/', function () {
 });
 
 // Rutas de controlador, si se tienen varias rutas que comparten un controlador común, se agrupan, se les puede agregar prefix y name
-Route::controller(GameController::class)->prefix('/games')->name('games.')->group(function () {
+Route::controller(VideoGameController::class)->prefix('/games')->name('games.')->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('/create', 'create')->name('create');
     Route::get('/{name_game}/{category?}', 'help')->name('help');
