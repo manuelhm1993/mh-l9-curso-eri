@@ -29,10 +29,19 @@ class VideoGameController extends Controller
 
     // Guardar en BBDD el nuevo video juego
     public function store(Request $request) {
+        // Validación de los campos vía request, valida según las reglas especificadas y devuelve un array con los campos
+        $validated = $request->validate([
+            // El trim validator ya viene por defecto en el middleware web, basta con usar required
+            'name'        => 'required|max:255',
+            'category_id' => 'required',
+        ]);
+
+        // Si la validación pasa, se ejecutará el código normalmente, si no, se hará un back con el objeto $errors
         $game = new VideoGame;
 
-        $game->name        = $request->name;
-        $game->category_id = $request->category_id;
+        // Usar el array validated, es un array asociativo que toma los nombres de los campos como clave
+        $game->name        = $validated['name'];
+        $game->category_id = $validated['category_id'];
         $game->active      = 1;
 
         $game->save();

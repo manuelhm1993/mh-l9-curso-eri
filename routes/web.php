@@ -17,7 +17,7 @@ use App\Http\Controllers\VideoGameController;
 
 Route::get('/', function () {
     // return view('welcome');
-    return "Bienvenidos al curso de Laravel 9 en El rincón de Isma";
+    return redirect()->route('games.index');
 });
 
 // Rutas de controlador, si se tienen varias rutas que comparten un controlador común, se agrupan, se les puede agregar prefix y name

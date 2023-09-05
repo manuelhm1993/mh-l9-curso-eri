@@ -16,13 +16,24 @@
     <form action="{{ route('games.store') }}" method="POST">
         @csrf
 
-        <input type="text" placeholder="Nombre" name="name" required>
+        {{-- Agregar la directiva error en caso de que exista error de validación --}}
+        <input type="text" placeholder="Nombre" name="name">
 
-        <select name="category_id" required>
+        @error('name')
+            {{ $message }}
+        @enderror
+
+        <select name="category_id">
             @foreach ($categories as $category)
-                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                <option value="{{ $category->id }}">
+                    {{ $category->name }}
+                </option>
             @endforeach
         </select>
+
+        @error('category_id')
+            {{ $message }}
+        @enderror
 
         <button type="submit" name="enviar">Enviar</button>
     </form>
