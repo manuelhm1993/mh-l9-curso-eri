@@ -17,6 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
 
+            // $table->unsignedBigInteger('category_id');
+            // $table->foreign('category_id')->references('id')->on('cateogries');
+
+            // Resume en una sola instrucción las dos de arriba
             $table->foreignId('category_id')
             ->constrained()
             ->onUpdate('cascade')
