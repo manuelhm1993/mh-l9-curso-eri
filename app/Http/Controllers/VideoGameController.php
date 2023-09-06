@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreVideoGameRequest;
 use App\Models\Category;
 use App\Models\VideoGame;
 use Illuminate\Http\Request;
@@ -28,13 +29,9 @@ class VideoGameController extends Controller
     }
 
     // Guardar en BBDD el nuevo video juego
-    public function store(Request $request) {
-        // Validación de los campos vía request, valida según las reglas especificadas y devuelve un array con los campos
-        $validated = $request->validate([
-            // El trim validator ya viene por defecto en el middleware web, basta con usar required
-            'name'        => 'required|max:255',
-            'category_id' => 'required',
-        ]);
+    public function store(StoreVideoGameRequest $request) {
+        // Validación de los campos vía from request (se usa el método validated en lugar de validate)
+        $validated = $request->validated();
 
         // Si la validación pasa, se ejecutará el código normalmente, si no, se hará un back con el objeto $errors
         $game = new VideoGame;
