@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreVideoGameRequest;
+use App\Mail\VideoGameMail;
 use App\Models\Category;
 use App\Models\VideoGame;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class VideoGameController extends Controller
 {
@@ -35,6 +37,19 @@ class VideoGameController extends Controller
 
         // Luego de dar de alta la propiedad fillable con los campos, se puede usar create y un array asociativo
         $game = VideoGame::create($validated);
+
+        // Enviar un email de notificación un usuario
+        // Mail::to('manuel_hm1993@hotmail.com')->send(new VideoGameMail('Manuel Henriquez'));
+
+        // Enviar un email de notificación un lote de usuarios
+        $lote = [
+            'Manuel Henriquez' => 'manuel_hm1993@hotmail.com',
+            'Fanny Carvajal'   => 'fannylucarvajal@gmail.com'
+        ];
+
+        foreach ($lote as $userName => $recipient) {
+            Mail::to($recipient)->send(new VideoGameMail($userName));
+        }
 
         return to_route('games.index');
     }
