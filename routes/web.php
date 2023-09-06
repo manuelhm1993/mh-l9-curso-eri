@@ -28,4 +28,5 @@ Route::controller(VideoGameController::class)->prefix('/games')->name('games.')-
     Route::get('/{video_game}', 'show')->name('show');
     Route::get('/{video_game}/edit', 'edit')->name('edit');
     Route::put('/{video_game}', 'update')->name('update');
+    Route::delete('/{video_game}', 'destroy')->name('destroy');
 });
