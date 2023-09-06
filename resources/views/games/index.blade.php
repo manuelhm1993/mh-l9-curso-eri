@@ -7,19 +7,6 @@
     <title>Games - Inicio</title>
 
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-
-    {{-- Simular un link --}}
-    <style>
-        .link {
-            text-decoration: underline;
-            color: rgb(0, 0, 238);
-            cursor: pointer;
-        }
-
-        .link:active {
-            color: rgb(255, 0, 0);
-        }
-    </style>
 </head>
 <body>
     <h1>Vista creada en blade y llamada desde el GameController</h1>
@@ -60,11 +47,7 @@
                 <td>
                     <a href="{{ route('games.show', $game->id) }}">Ver</a>
                     <a href="{{ route('games.edit', $game->id) }}">Editar</a>
-
-                    {{-- Simular un link con un span y ejecutar un formlario desde afuera --}}
-                    <span class="link" role="button" data-eliminar-submit="{{ $game->id }}">
-                        Eliminar
-                    </span>
+                    <a href="#" data-eliminar-submit="{{ $game->id }}">Eliminar</a>
 
                     <form action="{{ route('games.destroy', $game->id) }}" method="post" id="{{ $game->id }}">
                         @csrf
@@ -82,12 +65,14 @@
 
     <script src="{{ asset('js/app.js') }}"></script>
     <script>
+        // Delegación de eventos
         document.addEventListener('click', (e) => {
             const fuenteEvento = e.target;
 
+            // Validar que sea un link de submit y enviar el formulario correspondiente
             if(fuenteEvento.dataset.eliminarSubmit) {
-                console.log(fuenteEvento.dataset.eliminarSubmit);
-                console.log(document.querySelector(`form[id="${fuenteEvento.dataset.eliminarSubmit}"]`));
+                e.preventDefault();
+                document.querySelector(`form[id="${fuenteEvento.dataset.eliminarSubmit}"]`).submit();
             }
         });
     </script>
