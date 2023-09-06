@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\VideoGameController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,3 +30,8 @@ Route::controller(VideoGameController::class)->prefix('/games')->name('games.')-
     Route::put('/{video_game}', 'update')->name('update');
     Route::delete('/{video_game}', 'destroy')->name('destroy');
 });
+
+// Registra las 7 rutas de un controlador de recursos necesarias para un CRUD en una sóla línea
+Route::resources([
+    'categories' => CategoryController::class,
+]);
