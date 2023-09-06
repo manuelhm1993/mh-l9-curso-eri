@@ -13,6 +13,7 @@
 
     <p>
         <a href="{{ route('games.create') }}">Nuevo juego</a>
+        <a href="{{ route('categories.index') }}">Ver categorías</a>
     </p>
 
     <h2>Listado de juegos</h2>
@@ -49,7 +50,13 @@
                     <a href="{{ route('games.edit', $game->id) }}">Editar</a>
 
                     {{-- Link para enviar el formulario de eliminación --}}
-                    <a href="{{ route('games.destroy', $game->id) }}" data-eliminar-submit="{{ $game->id }}">Eliminar</a>
+                    <a
+                    href="{{ route('games.destroy', $game->id) }}"
+                    data-game-id="{{ $game->id }}"
+                    data-game-name="{{ $game->name }}"
+                    >
+                        Eliminar
+                    </a>
 
                     {{-- Formulario para eliminar un juego --}}
                     <form action="{{ route('games.destroy', $game->id) }}" method="post" id="{{ $game->id }}">
@@ -68,14 +75,26 @@
 
     <script src="{{ asset('js/app.js') }}"></script>
     <script>
+        const eliminar = (game) => {
+            if(confirm(`¿Desea eliminar el video juego ${game.name}?`)) {
+                document.querySelector(`form[id="${game.id}"]`).submit();
+            }
+        };
+
         // Delegación de eventos
         document.addEventListener('click', (e) => {
             const fuenteEvento = e.target;
 
             // Validar que sea un link de submit y enviar el formulario correspondiente
-            if(fuenteEvento.dataset.eliminarSubmit) {
+            if(fuenteEvento.dataset.gameId) {
                 e.preventDefault();
-                document.querySelector(`form[id="${fuenteEvento.dataset.eliminarSubmit}"]`).submit();
+
+                const game = {
+                    id: fuenteEvento.dataset.gameId,
+                    name: fuenteEvento.dataset.gameName,
+                }
+
+                eliminar(game);
             }
         });
     </script>
