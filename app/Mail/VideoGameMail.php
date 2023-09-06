@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -14,13 +15,20 @@ class VideoGameMail extends Mailable
     use Queueable, SerializesModels;
 
     /**
+     * The user instance.
+     *
+     * @var \App\Models\User
+     */
+    protected $user;
+
+    /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(User $user)
     {
-        //
+        $this->user = $user;
     }
 
     /**
@@ -43,7 +51,10 @@ class VideoGameMail extends Mailable
     public function content()
     {
         return new Content(
-            view: 'mails.videogame',
+            view: 'emails.video_games.created',
+            with: [
+                'userName' => $this->user->name,
+            ],
         );
     }
 
