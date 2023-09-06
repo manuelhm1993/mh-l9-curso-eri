@@ -30,18 +30,11 @@ class VideoGameController extends Controller
 
     // Guardar en BBDD el nuevo video juego
     public function store(StoreVideoGameRequest $request) {
-        // Validación de los campos vía from request (se usa el método validated en lugar de validate)
+        // El método validated retorna un array asociativo con los nombres de los campos como clave
         $validated = $request->validated();
 
-        // Si la validación pasa, se ejecutará el código normalmente, si no, se hará un back con el objeto $errors
-        $game = new VideoGame;
-
-        // Usar el array validated, es un array asociativo que toma los nombres de los campos como clave
-        $game->name        = $validated['name'];
-        $game->category_id = $validated['category_id'];
-        $game->active      = 1;
-
-        $game->save();
+        // Luego de dar de alta la propiedad fillable con los campos, se puede usar create y un array asociativo
+        $game = VideoGame::create($validated);
 
         return to_route('games.index');
     }
