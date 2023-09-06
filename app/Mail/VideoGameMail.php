@@ -15,20 +15,20 @@ class VideoGameMail extends Mailable
     use Queueable, SerializesModels;
 
     /**
-     * The user instance.
+     * The user name.
      *
-     * @var \App\Models\User
+     * @var string
      */
-    protected $user;
+    protected $userName;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(User $user)
+    public function __construct(string $userName)
     {
-        $this->user = $user;
+        $this->userName = $userName;
     }
 
     /**
@@ -53,7 +53,7 @@ class VideoGameMail extends Mailable
         return new Content(
             view: 'emails.video_games.created',
             with: [
-                'userName' => $this->user->name,
+                'userName' => $this->userName,
             ],
         );
     }
