@@ -19,6 +19,10 @@
 
         <input type="text" placeholder="Nombre" name="name" value="{{ $video_game->name }}">
 
+        @error('name')
+            {{ $message }}
+        @enderror
+
         <select name="category_id">
             @foreach ($categories as $category)
                 @if ($category->id === $video_game->category_id)
@@ -28,6 +32,10 @@
                 @endif
             @endforeach
         </select>
+
+        @error('category_id')
+            {{ $message }}
+        @enderror
 
         <button type="submit" name="enviar">Enviar</button>
     </form>

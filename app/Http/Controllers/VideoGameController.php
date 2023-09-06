@@ -63,8 +63,14 @@ class VideoGameController extends Controller
 
     // Actualizar el juego con los datos recibidos
     public function update(Request $request, VideoGame $video_game) {
-        $video_game->name        = $request->name;
-        $video_game->category_id = $request->category_id;
+        // Validación de datos
+        $validated = $request->validate([
+            'name'        => 'required|max:255',
+            'category_id' => 'required',
+        ]);
+
+        $video_game->name        = $validated['name'];
+        $video_game->category_id = $validated['category_id'];
         $video_game->active      = 1;
 
         $video_game->save();
