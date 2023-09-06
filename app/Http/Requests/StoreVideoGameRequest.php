@@ -13,7 +13,7 @@ class StoreVideoGameRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true; // Permitir que todos los usuarios puedan crear video juegos
     }
 
     /**
@@ -23,8 +23,11 @@ class StoreVideoGameRequest extends FormRequest
      */
     public function rules()
     {
+        // Reglas de validación para los campos
         return [
-            //
+            // El trim validator ya viene por defecto en el middleware web, basta con usar required
+            'name'        => 'required|max:255',
+            'category_id' => 'required',
         ];
     }
 }
