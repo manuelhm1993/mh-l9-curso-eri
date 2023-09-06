@@ -67,4 +67,11 @@ class VideoGameController extends Controller
 
         return to_route('games.index');
     }
+
+    // Eliminar el juego recibido
+    public function destroy(VideoGame $video_game) {
+        $video_game->delete();
+
+        return to_route('games.index');
+    }
 }

@@ -37,7 +37,7 @@
                 <td>{{ $game->name }}</td>
                 <td>{{ $game->category->name }}</td>
                 <td>{{ date('d/m/Y', strtotime($game->created_at)) }}</td>
-                <td>
+                <td align="center">
                     @if ($game->active)
                         <span style='color:green'>Si</span>
                     @else
@@ -47,8 +47,11 @@
                 <td>
                     <a href="{{ route('games.show', $game->id) }}">Ver</a>
                     <a href="{{ route('games.edit', $game->id) }}">Editar</a>
-                    <a href="#" data-eliminar-submit="{{ $game->id }}">Eliminar</a>
 
+                    {{-- Link para enviar el formulario de eliminación --}}
+                    <a href="{{ route('games.destroy', $game->id) }}" data-eliminar-submit="{{ $game->id }}">Eliminar</a>
+
+                    {{-- Formulario para eliminar un juego --}}
                     <form action="{{ route('games.destroy', $game->id) }}" method="post" id="{{ $game->id }}">
                         @csrf
                         @method('DELETE')
