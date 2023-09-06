@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\GameController;
+use App\Http\Controllers\VideoGameController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,12 +17,16 @@ use App\Http\Controllers\GameController;
 
 Route::get('/', function () {
     // return view('welcome');
-    return "Bienvenidos al curso de Laravel 9 en El rincón de Isma";
+    return redirect()->route('games.index');
 });
 
 // Rutas de controlador, si se tienen varias rutas que comparten un controlador común, se agrupan, se les puede agregar prefix y name
-Route::controller(GameController::class)->prefix('/games')->name('games.')->group(function () {
+Route::controller(VideoGameController::class)->prefix('/games')->name('games.')->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('/create', 'create')->name('create');
-    Route::get('/{name_game}/{category?}', 'help')->name('help');
+    Route::post('/', 'store')->name('store');
+    Route::get('/{video_game}', 'show')->name('show');
+    Route::get('/{video_game}/edit', 'edit')->name('edit');
+    Route::put('/{video_game}', 'update')->name('update');
+    Route::delete('/{video_game}', 'destroy')->name('destroy');
 });
