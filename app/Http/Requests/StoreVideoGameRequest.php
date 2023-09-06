@@ -42,4 +42,16 @@ class StoreVideoGameRequest extends FormRequest
             'name' => 'videogame name',
         ];
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'name.required' => 'El nombre del video juego no puede estar vacío',
+        ];
+    }
 }
